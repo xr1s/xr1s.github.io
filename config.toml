@@ -1,0 +1,43 @@
+baseURL = "https://xr1s.me"
+buildExpired = true
+hasCJKLanguage = true
+languageCode = "zh-CN"
+title = "克莉丝随笔"
+
+[author]
+email = "std.xris@gmail.com"
+name = "xr1s"
+
+[markup.highlight]
+style = "monokailight"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[[menu.main]]
+identifier = "posts"
+name = "Posts"
+url = "/"
+weight = 1
+
+[module]
+[[module.imports]]
+path = "github.com/xr1s/hugo-theme-texify"
+
+[permalinks]
+posts = "/:year/:month/:filename/"
+
+[params]
+customCSS = ["css/custom.css"]
+description = "克莉丝随笔"
+footnote = """
+Follow me on <a class=link href="https://github.com/xr1s">GitHub</a> or
+<a class=link href=/index.xml>RSS</a> |
+<a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
+"""
+since = 2022
+emphasisWithDots = true
+
+[params.math]
+enable = true
+use = "katex"
