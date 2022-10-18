@@ -1,5 +1,6 @@
 baseURL = "https://xr1s.me"
 buildExpired = true
+buildFuture = true
 hasCJKLanguage = true
 languageCode = "zh-CN"
 title = "克莉丝随笔"
@@ -9,6 +10,7 @@ email = "std.xris@gmail.com"
 name = "xr1s"
 
 [markup.highlight]
+lineNos = true
 style = "monokailight"
 
 [markup.goldmark.renderer]
@@ -25,7 +27,7 @@ weight = 1
 path = "github.com/xr1s/hugo-theme-texify"
 
 [permalinks]
-posts = "/:year/:month/:filename/"
+posts = "/:year/:month/:day/:filename/"
 
 [params]
 customCSS = ["css/custom.css"]
@@ -35,8 +37,9 @@ Follow me on <a class=link href="https://github.com/xr1s">GitHub</a> or
 <a class=link href=/index.xml>RSS</a> |
 <a class=link href=https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh target=_blank rel=noopener>CC BY-NC-SA 4.0</a>
 """
-since = 2022
+since = 2018
 emphasisWithDots = true
+toc = true
 
 [params.math]
 enable = true
