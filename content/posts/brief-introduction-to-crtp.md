@@ -2,7 +2,7 @@
 title = "C++ CRTP 简介"
 date = "2022-10-18"
 type = "post"
-tags = ["C++"]
+tags = ["C/C++"]
 aliases = ["/2018/05/10/brief-introduction-to-crtp/"]
 +++
 
