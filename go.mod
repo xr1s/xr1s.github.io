@@ -1,5 +1,5 @@
 module github.com/xr1s/xr1s.github.io
 
-go 1.19
+go 1.20
 
-require github.com/xr1s/hugo-theme-texify v0.0.0-20221019024554-0e3bc1cf634b // indirect
+require github.com/xr1s/hugo-theme-texify v0.0.0-20230530113243-f831873e0e21 // indirect
