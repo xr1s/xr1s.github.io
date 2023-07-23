@@ -59,7 +59,6 @@ script = """<script src="https://giscus.app/client.js"
         data-input-position="top"
         data-theme="light"
         data-lang="zh-CN"
-        data-loading="lazy"
         crossorigin="anonymous"
         async>
 </script>"""
