@@ -16,6 +16,11 @@ style = "monokailight"
 [markup.goldmark.renderer]
 unsafe = true
 
+[markup.tableOfContents]
+endLevel = 3
+ordered = false
+startLevel = 2
+
 [[menu.main]]
 identifier = "posts"
 name = "Posts"

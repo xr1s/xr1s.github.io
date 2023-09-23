@@ -77,19 +77,19 @@ class RubberDuck extends Duck {
 
 ```c++
 struct Quack {
-  void quack() { fmt::print("quack\n"); }
+  void quack() { std::println("quack"); }
 };
 
 struct Dump {
-  void quack() { fmt::print("silent\n"); }
+  void quack() { std::println("silent"); }
 };
 
 struct Swim {
-  void swim() { fmt::print("swim\n"); }
+  void swim() { std::println("swim"); }
 };
 
 struct Float {
-  void swim() { fmt::print("float\n"); }
+  void swim() { std::println("float"); }
 };
 
 // 绿头鸭，会叫，也会游泳
@@ -117,19 +117,19 @@ struct Named {
 };
 
 struct Quack: virtual Named {
-  void quack() { fmt::print("{} quacks\n", this->name()); }
+  void quack() { std::println("{} quacks", this->name()); }
 };
 
 struct Dump: virtual Named {
-  void quack() { fmt::print("{} keeps silence\n", this->name()); }
+  void quack() { std::println("{} keeps silence", this->name()); }
 };
 
 struct Swim: virtual Named {
-  void swim() { fmt::print("{} swims\n", this->name()); }
+  void swim() { std::println("{} swims", this->name()); }
 };
 
 struct Float: virtual Named {
-  void swim() { fmt::print("{} floats\n", this->name()); }
+  void swim() { std::println("{} floats", this->name()); }
 };
 ```
 
@@ -155,30 +155,30 @@ private:
 };
 ```
 
-但是众所周知，这个世界上有两件事是我们 cpper 所厌恶的，一是菱形继承，二是额外的运行时代价。这就是 CRTP 能帮我们消灭的敌人。
+但是众所周知，这个世界上有两件事是我们 c++er 所厌恶的，一是菱形继承，二是额外的运行时代价。这就是 CRTP 能帮我们消灭的敌人。
 
 ```c++
 template <typename Named> struct Quack {
   void quack() {
-    fmt::print("{} quacks\n", static_cast<Named *>(this)->name());
+    std::println("{} quacks", static_cast<Named *>(this)->name());
   }
 };
 
 template <typename Named> struct Dump {
   void quack() {
-    fmt::print("{} keeps silence\n", static_cast<Named *>(this)->name());
+    std::println("{} keeps silence", static_cast<Named *>(this)->name());
   }
 };
 
 template <typename Named> struct Swim {
   void swim() {
-    fmt::print("{} swims\n", static_cast<Named *>(this)->name());
+    std::println("{} swims", static_cast<Named *>(this)->name());
   }
 };
 
 template <typename Named> struct Float {
   void swim() {
-    fmt::print("{} floats\n", static_cast<Named *>(this)->name());
+    std::println("{} floats", static_cast<Named *>(this)->name());
   }
 };
 ```
@@ -262,7 +262,7 @@ concept Named = requires(T value) {
 template <Named T>
 struct Quack {
   void quack() {
-    fmt::print("{} quacks\n", static_cast<Named *>(this)->name());
+    std::println("{} quacks", static_cast<Named *>(this)->name());
   }
 };
 
@@ -270,21 +270,45 @@ struct Quack {
 template <typename T>
 struct Quack {
   void quack() requires Named<T> {
-    fmt::print("{} quacks\n", static_cast<Named *>(this)->name());
+    std::println("{} quacks", static_cast<Named *>(this)->name());
   }
 };
 ```
 
-在 C++23 中，有了所谓的<a href="https://zh.cppreference.com/w/cpp/language/member_functions#.E6.98.BE.E5.BC.8F.E5.AF.B9.E8.B1.A1.E5.BD.A2.E5.8F.82" target="_blank">显式对象形参（Deducing this）</a>，可以对代码稍作简化，去掉代码中的 `static_cast`。
+在 C++23 中，有了所谓的[显式对象形参（Deducing this）](https://zh.cppreference.com/w/cpp/language/member_functions#.E6.98.BE.E5.BC.8F.E5.AF.B9.E8.B1.A1.E5.BD.A2.E5.8F.82)，我们首先可以对代码稍作简化，去掉代码中的 `static_cast`。
 
 ```c++
 template <typename T>
 struct Quack {
   void quack(this T &self) requires Named<T> {
-    fmt::print("{} quacks\n", self.name());
+    std::println("{} quacks", self.name());
   }
 };
 ```
+
+然后可以再激进一些，既然可以在函数声明中直接指定 this 的类型，那何必还需要在外面的 struct 上套一层 template 呢。这句话象征着，我们的 CRTP 甚至再也不需要 Curiously，不需要 Recurring，甚至不需要 Template：
+
+```c++
+struct Quack {
+  template <typename Self>
+  void quack(this Self &self) requires Named<T> {
+    std::println("{} quacks", self.name());
+  }
+};
+```
+
+以至于在继承的时候，直接就不再需要传递自身类型作为参数了。
+
+```c++
+struct Duck: Quack {
+  std::string_view name() {
+    return this->name_;
+  }
+  std::string name_;
+}
+```
+
+这个变化虽然不大，但确实称得上是意义非凡。
 
 ## 鸭子何必是鸭子
 
