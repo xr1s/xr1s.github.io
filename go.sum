@@ -1,2 +1,6 @@
 github.com/xr1s/hugo-theme-texify v0.0.0-20230722200119-e1cedba07f7c h1:/jA/QZwrIbJumL7uYV+GtZAR/D5ln3IgRV9gXWNEjFM=
 github.com/xr1s/hugo-theme-texify v0.0.0-20230722200119-e1cedba07f7c/go.mod h1:SLIr3t0K+22kWPe0g9oBZmJu1PSOlEV9GRq3n7UWk6M=
+github.com/xr1s/hugo-theme-texify v0.0.0-20241126121227-ed306933391a h1:HA3QTnh1b5gzdmNRkPc265D/ilOGVAZuKHygWsRQPHs=
+github.com/xr1s/hugo-theme-texify v0.0.0-20241126121227-ed306933391a/go.mod h1:SLIr3t0K+22kWPe0g9oBZmJu1PSOlEV9GRq3n7UWk6M=
+github.com/xr1s/hugo-theme-texify v0.0.0-20241126150520-5b177d418c7a h1:Aq1yafDvKUqdGrfFMZAVULPyWkSR+fCZLZ+bgXTVBDc=
+github.com/xr1s/hugo-theme-texify v0.0.0-20241126150520-5b177d418c7a/go.mod h1:SLIr3t0K+22kWPe0g9oBZmJu1PSOlEV9GRq3n7UWk6M=
