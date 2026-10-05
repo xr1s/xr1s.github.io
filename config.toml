@@ -2,7 +2,7 @@ baseURL = "https://xr1s.me"
 buildExpired = true
 buildFuture = true
 hasCJKLanguage = true
-languageCode = "zh-CN"
+locale = "zh-CN"
 title = "克莉丝随笔"
 
 [author]
@@ -15,6 +15,9 @@ style = "monokailight"
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[markup.goldmark.parser.attribute]
+block = true
 
 [markup.tableOfContents]
 endLevel = 3
